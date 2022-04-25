@@ -6,6 +6,7 @@ public class Cell : MonoBehaviour
 {
     public bool isAlive = false;
     public int numNeighbors = 0;
+    public string prefab;
     public void SetAlive(bool isAlive)
     {
         this.isAlive = isAlive;
@@ -17,5 +18,9 @@ public class Cell : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().enabled = false; 
         }
+    }
+    public void Destroy()
+    {
+        Destroy(this.gameObject);
     }
 }
