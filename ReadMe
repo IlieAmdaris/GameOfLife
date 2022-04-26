@@ -1,0 +1,8 @@
+Features:
+Press P to pause the simulation
+Press B to unpause the simulation
+Press L to load a pattern
+Press S to save a pattern
+Left Click to create a green cell
+Right Click to create a virus
+The rules are the same for a cell and for a virus but if a cell were to be born the prefab will be the prefab that is the most common among the cell's neighbours
