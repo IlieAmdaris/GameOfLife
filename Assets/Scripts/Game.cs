@@ -212,6 +212,11 @@ public class Game : MonoBehaviour
     }
     private void LoadPattern()
     {
+        foreach (var item in grid)
+        {
+            item.Destroy();
+        }
+        PlaceCells();
         string path = "patterns";
         if (!Directory.Exists(path)) return;
         XmlSerializer serializer = new XmlSerializer(typeof(Pattern));
