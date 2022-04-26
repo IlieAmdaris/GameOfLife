@@ -42,6 +42,7 @@ public class Game : MonoBehaviour
             if (timer >= speed)
             {
                 timer = 0f;
+                PlaceRandomCells();
                 CountNeighbors();
                 ControlPopulation();
             }
@@ -64,6 +65,21 @@ public class Game : MonoBehaviour
                 cell.SetAlive(false);
             }
         }
+    }
+    void PlaceRandomCells()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            int height = UnityEngine.Random.Range(SCREEN_HEIGHT / 2, SCREEN_HEIGHT);
+            int width = UnityEngine.Random.Range(0, SCREEN_WIDTH / 2);
+            grid[width, height].prefab = RandomizeAliveCells() ? "Prefabs/Virus" : "Prefabs/Cell";
+            grid[width, height].SetAlive(RandomizeAliveCells());
+            if (grid[width, height].isAlive)
+            {
+                AddToDictionary(grid[width, height].prefab);
+            }
+        }
+
     }
     void CountNeighbors()
     {
@@ -160,22 +176,46 @@ public class Game : MonoBehaviour
         {
             for (int x = 0; x < SCREEN_WIDTH; x++)
             {
-                if (grid[x, y].isAlive)
+                if (y <= SCREEN_HEIGHT / 2 || x <= SCREEN_WIDTH / 2)
                 {
-                    if (grid[x, y].numNeighbors != 2 && grid[x, y].numNeighbors != 3)
+                    if (grid[x, y].isAlive)
                     {
-                        grid[x, y].SetAlive(false);
+                        if (grid[x, y].numNeighbors != 2 && grid[x, y].numNeighbors != 3)
+                        {
+                            grid[x, y].SetAlive(false);
+                        }
+                    }
+                    else
+                    {
+                        if (grid[x, y].numNeighbors == 3)
+                        {
+                            var prefab = grid[x, y].prefab;
+                            Cell cell = Instantiate(Resources.Load(prefab, typeof(Cell)), new Vector2(x, y), Quaternion.identity) as Cell;
+                            cell.prefab = prefab;
+                            grid[x, y] = cell;
+                            grid[x, y].SetAlive(true);
+                        }
                     }
                 }
-                else
+                else if(x > SCREEN_WIDTH / 2)
                 {
-                    if (grid[x, y].numNeighbors == 3)
+                    if (grid[x, y].isAlive)
                     {
-                        var prefab = grid[x, y].prefab;
-                        Cell cell = Instantiate(Resources.Load(prefab, typeof(Cell)), new Vector2(x, y), Quaternion.identity) as Cell;
-                        cell.prefab = prefab;
-                        grid[x, y] = cell;
-                        grid[x, y].SetAlive(true);
+                        if (grid[x, y].numNeighbors < 2 || grid[x, y].numNeighbors >= 5)
+                        {
+                            grid[x, y].SetAlive(false);
+                        }
+                    }
+                    else
+                    {
+                        if (grid[x, y].numNeighbors == 3)
+                        {
+                            var prefab = grid[x, y].prefab;
+                            Cell cell = Instantiate(Resources.Load(prefab, typeof(Cell)), new Vector2(x, y), Quaternion.identity) as Cell;
+                            cell.prefab = prefab;
+                            grid[x, y] = cell;
+                            grid[x, y].SetAlive(true);
+                        }
                     }
                 }
             }
@@ -184,7 +224,7 @@ public class Game : MonoBehaviour
     bool RandomizeAliveCells()
     {
         int rand = UnityEngine.Random.Range(0, 100);
-        if (rand < 45) return true;
+        if (rand < 50) return true;
         return false;
     }
     private void SavePattern()
