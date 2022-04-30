@@ -6,6 +6,9 @@ Press L to load a pattern
 Press S to save a pattern
 Left Click to create a green cell
 Right Click to create a virus
+Press B and wait. You will encounter a new virus eventually, this one is red this time.The player cannot create it. It answers only to the gods
+randomness. Make sure to place brave white and green cells to stop it from getting to the top right field, since afterwards it won't be stopped.
+It will devour all 4 ~~nations~~ fields and the screen will be quite red at that point. Dont let that happen.
 The rules are the same for a cell and for a virus but if a cell were to be born the prefab will be the prefab that is the most common among the cell's neighbours
 The top left quarter randomly revives or kills a cell and assigns to it a random prefab,this action is repeated 20 times for each frame.
 The top right quarter has different rules
