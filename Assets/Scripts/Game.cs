@@ -72,7 +72,7 @@ public class Game : MonoBehaviour
         {
             int height = UnityEngine.Random.Range(SCREEN_HEIGHT / 2, SCREEN_HEIGHT);
             int width = UnityEngine.Random.Range(0, SCREEN_WIDTH / 2);
-            grid[width, height].prefab = RandomizeAliveCells() ? "Prefabs/Virus" : "Prefabs/Cell";
+            grid[width, height].prefab = RandomizeAliveCells() ? "Prefabs/Cell" : "Prefabs/RedVirus";
             grid[width, height].SetAlive(RandomizeAliveCells());
             if (grid[width, height].isAlive)
             {
