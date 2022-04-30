@@ -1,3 +1,4 @@
+GavemOfLive v.1.0
 Features:
 Press P to pause the simulation
 Press B to unpause the simulation
@@ -6,3 +7,9 @@ Press S to save a pattern
 Left Click to create a green cell
 Right Click to create a virus
 The rules are the same for a cell and for a virus but if a cell were to be born the prefab will be the prefab that is the most common among the cell's neighbours
+The top left quarter randomly revives or kills a cell and assigns to it a random prefab,this action is repeated 20 times for each frame.
+The top right quarter has different rules
+The bottom half has normal rules
+One of the known flaws is the gameObject management, for the sake of saving time, we didn't optimize the creation and destruction of game cells
+And as such the cells are continuously created causing the frame rate to drop after some time, but since this issue doesn't appear soon enough to hinder the observation
+of the existing features the game development team has decided to leave this issue for the day one patch.
